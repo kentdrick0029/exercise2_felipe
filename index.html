@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Verification</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+    .card h2 {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .input-group {
+      margin-bottom: 1rem;
+    }
+    input[type="email"] {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+    }
+    button {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1rem;
+      background-color: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+    .message {
+      margin-top: 1rem;
+      text-align: center;
+      font-weight: bold;
+    }
+    .success {
+      color: #16a34a;
+    }
+    .error {
+      color: #dc2626;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Email Verification</h2>
+    <div class="input-group">
+      <input type="email" id="email" placeholder="Enter your email">
+    </div>
+    <button onclick="verifyEmail()" id="verifyBtn">Verify Email</button>
+    <div id="message" class="message"></div>
+  </div>
+
+  <script>
+    function verifyEmail() {
+      const email = document.getElementById('email').value;
+      const messageDiv = document.getElementById('message');
+      const verifyBtn = document.getElementById('verifyBtn');
+
+      verifyBtn.disabled = true;
+      verifyBtn.textContent = 'Verifying...';
+      messageDiv.textContent = '';
+      messageDiv.classList.remove('success', 'error');
+
+      setTimeout(() => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (emailRegex.test(email)) {
+          messageDiv.textContent = '✔ Email is valid and verified!';
+          messageDiv.classList.add('success');
+        } else {
+          messageDiv.textContent = '✖ Invalid email address.';
+          messageDiv.classList.add('error');
+        }
+        verifyBtn.disabled = false;
+        verifyBtn.textContent = 'Verify Email';
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
